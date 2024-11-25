@@ -2,42 +2,64 @@
 setlocal enabledelayedexpansion
 
 :: Define the source file and the file to be renamed
+:: directory where control files exist
+set TOOL_PATH=e:\projects\SY0-701
+set image_path=Unassigned
 
-set TOOL_PATH=C:\projects\SY0-701
+if not exist "%TOOL_PATH%\parsed_path.txt" (
+    ECHO "parsed_path.TXT not set. >%TOOL_PATH%\parsed_path.TXT< Exiting."
+    exit /b
+) else (
+    echo "parsed_path.txt Exists"
+)
+set Parsed_Path="%TOOL_PATH%\parsed_path.TXT"
 
-if not exist %TOOL_PATH%\parsed_path.TXT (
-    ECHO parsed_path.TXT not set. Exiting.
-exit /b
+:: get the path where images are located. Parsed_Path.txt has the image path
+
+for /F "usebackq tokens=* delims=" %%i in (%Parsed_Path%) do (
+    echo This is the PARSED PATH: "%%i"
+    SET image_path=%%i
 )
 
-::for /F "tokens=1" %%i in (%TOOL_PATH%\parsed_path.TXT) do echo This is the PARSED PATH: "%%i"  & SET QUESTION_OR_ANSWER=%%i
 
+echo ">"%image_path%"<"
 
-::set file_path=E:\OneDrive\EMPLOYMENT\000 SY0-701\Parsed Questions
-set file_path=E:\OneDrive\EMPLOYMENT\000 SY0-701\Parsed Answers
 set content_file=ch-q.txt
-set file_to_rename=%file_path%\fixedname.jpg
+set file_to_rename=fixedname.jpg
 
 :: Check if content file exists
-if not exist "%content_file%" (
-    echo The file %content_file% does not exist.
+if not exist "%TOOL_PATH%\%content_file%" (
+    set "msg=Tool Path Error: ThE file %TOOL_PATH%\%content_file% does not exist.""
+    echo %msg%
+    echo %msg% >> "%TOOL_PATH%\logs\rename_cmd.log"
     exit /b
+) else (
+    echo Exist: %content_file%
 )
 
 :: Read the content of the content_file (assuming the content is in the first line)
-set /p new_name=<%content_file%
+set /p new_name=<%tool_path%\%content_file%
 
 :: Remove any unwanted spaces or newlines
 set new_name=%new_name: =%
 
-:: Check if fixedname.txt exists
-if not exist "%file_to_rename%" (
-    echo The file %file_to_rename% does not exist.
+:: Check if fixedname.jpg exists
+echo Checking file: "%image_path%\%file_to_rename%"
+
+
+
+if not exist "%image_path%\%file_to_rename%" (
+    echo THE file %image_path%\%file_to_rename% does not exist. Exiting
+    echo "THe file %image_path%\%file_to_rename% does not exist. Exiting" >> "%TOOL_PATH%\logs\rename_cmd.log"
     exit /b
+) else (
+    echo file_to_rename is found
 )
 
 :: Rename the file
-ren "%file_to_rename%" "%new_name%.jpg"
+cd %image_path%
+echo "Image_path %image_path%" >> "%TOOL_PATH%\logs\rename_cmd.log"
+ren %file_to_rename% %new_name%.jpg
 
 :: Notify the user
 echo Renamed "%file_to_rename%" to "%new_name%.txt"

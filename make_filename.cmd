@@ -2,7 +2,7 @@
 setlocal enabledelayedexpansion
 
 call "increment_question.cmd"
-
+:: the call will change directory, dont need to do it here too??
 :: Define the input and output files
 set chapter_file=chapter.txt
 set question_file=question.txt

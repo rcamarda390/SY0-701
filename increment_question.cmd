@@ -1,7 +1,18 @@
 @echo off
 setlocal enabledelayedexpansion
 
+
+
 set filename=question.txt
+:: directory where control files exist
+set TOOL_PATH=e:\projects\SY0-701
+
+if not exist %TOOL_PATH%\parsed_path.TXT (
+    ECHO parsed_path.TXT not set. Exiting.
+exit /b
+)
+
+cd %TOOL_PATH%
 
 :: Check if the file exists
 if not exist %filename% (
