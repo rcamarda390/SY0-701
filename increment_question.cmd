@@ -1,8 +1,6 @@
 @echo off
 setlocal enabledelayedexpansion
 
-
-
 set filename=question.txt
 :: directory where control files exist
 set TOOL_PATH=e:\projects\SY0-701

@@ -20,5 +20,3 @@
 {{alt}{s}}
 {{pause:500}}
 {{exec:python|0|e:\projects\sy0-701\rename_snip.py}}
-{{pause:250}}
-{{exec:e:\projects\sy0-701\make_filename.cmd}}
