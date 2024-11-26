@@ -2,6 +2,7 @@ import os
 import logging
 import subprocess
 import sys
+import time
 
 # Define paths
 root_folder = r"e:\projects\sy0-701"
@@ -83,9 +84,19 @@ def main():
         log_and_print(f"Error renaming file: {e}", "error")
         sys.exit(1)
 
+    # Introduce a short delay to ensure visibility
+    time.sleep(1)
+
+    # Verify the renamed file exists
+    if os.path.exists(new_file_path):
+        log_and_print(f"Renamed file is now visible: {new_file_path}")
+    else:
+        log_and_print(f"Error: Renamed file is not visible after operation: {new_file_path}", "error")
+        sys.exit(1)
+
     # Run the batch file last
     log_and_print("Running the batch file as the final step.")
-    # run_batch_file(batch_file)
+#    run_batch_file(batch_file)
 
 if __name__ == "__main__":
     log_and_print("Script started.")
