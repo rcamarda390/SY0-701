@@ -1,0 +1,49 @@
+{{VarSet:QuestionPath:E:\OneDrive\EMPLOYMENT\000 SY0-701\Parsed Questions}}
+{{VarSet:AnswerPath:E:\OneDrive\EMPLOYMENT\000 SY0-701\Parsed Answers}}
+{{mousexy:800,400}}
+{{Lbutton}}
+{{ALT}{A}}
+{{pause:100}}
+{{CTRL}{Q}}
+{{ALT}{N}}
+{{DELETE}}
+{{SetClipBoard:$QuestionPath}}
+{{pause:200}}
+{{CTRL}{V}}
+{{ALT}{o}}
+{{delete}}
+{{backspace}}
+{{FUNC:CONCAT:FileName:CH:$Chapter:-:$QuestionPos:.jpg}}
+{{SetClipBoard:$FileName}}
+{{pause:100}}
+{{ctrl}{V}}
+{{alt}{O}}
+{{func:concat:UniqueName:$FileName: Question}}
+{{alt}{o}}
+{{alt}{Y}
+{{pause:500}}
+
+
+{{mousexy:850,640}}
+{{Lbutton}}
+{{CTRL}{Q}}
+{{ALT}{N}}
+{{DELETE}}
+{{SetClipBoard:$AnswerPath}}
+{{pause:200}}
+{{CTRL}{V}}
+{{ALT}{o}}
+{{pause:250}}
+{{delete}}
+{{backspace}}
+{{FUNC:CONCAT:FileName:CH:$Chapter:-:$QuestionPos:.jpg}}
+{{SetClipBoard:$FileName}}
+{{pause:200}}
+{{ctrl}{V}}
+{{alt}{O}}
+{{func:concat:UniqueName:$FileName: Answer}}
+{{alt}{o}}
+{{alt}{Y}
+{{func:ADD:QuestionPos:$QuestionPos:1}}
+{{pause:1000}}
+
